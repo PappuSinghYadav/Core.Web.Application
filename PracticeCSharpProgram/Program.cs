@@ -36,7 +36,6 @@ class Email
 
         string name = data.name;
         int age = data.age;
-        string city = data.city;
 
 
         Task<int> task1 = Task.Run(() => CalculateSomeValue());
