@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 
+import Counter from './Counter';
+
 export class Home extends Component {
   static displayName = Home.name;
 
-  render() {
+    render() {
+        var myStyle = {
+            fontSize:40
+        }
     return (
       <div>
             <h1>Authenticate</h1>
@@ -14,6 +19,7 @@ export class Home extends Component {
             <input id="TextBox"></input>
             <p></p>
             <button onClick={callApi}>Call API</button>
+            <h1 style={myStyle}>www.javatpoint.com</h1>  
       </div>
 
     );
