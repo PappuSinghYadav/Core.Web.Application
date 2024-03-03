@@ -10,8 +10,11 @@ namespace PracticeCSharpProgram
     {
         public static bool IsBalanced(string str)
         {
+            string str1 = "()";
+            string str2 = "([]{})";
+            string str3 = "([)]";
             Stack<char> endings = new Stack<char>();
-            foreach (var curr in str)
+            foreach (var curr in str1)
             {
                 switch (curr)
                 {
@@ -35,15 +38,6 @@ namespace PracticeCSharpProgram
             return true;
         }
 
-        public static void Main(string[] args)
-        {
-            string str1 = "()";
-            string str2 = "([]{})";
-            string str3 = "([)]";
-
-            Console.WriteLine(IsBalanced(str1)); // True
-            Console.WriteLine(IsBalanced(str2)); // True
-            Console.WriteLine(IsBalanced(str3)); // False
-        }
+        
     }
 }
