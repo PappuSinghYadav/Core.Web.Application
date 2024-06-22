@@ -2,8 +2,6 @@ using System.Data.SqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var allowedOrigin = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
@@ -17,10 +15,8 @@ builder.Services.AddCors(options =>
     });
 });
 
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -34,26 +30,26 @@ app.UseCors("myAppCors");
 
 app.MapGet("/username", () =>
 {
+    //Note: This will work without docker only
     var con = app.Configuration.GetConnectionString("DefaultConnection");
-    string resss = string.Empty; 
+    //var conn2 = app.Configuration["ConnectionStrings:DefaultConnection"];
+    string result = string.Empty; 
     using (SqlConnection sqlConnection = new SqlConnection(con))
     {
         sqlConnection.Open();
         using (SqlCommand cmd = new SqlCommand("select * from users", sqlConnection))
         {
-            var result = cmd.ExecuteReader();
-            while (result.Read())
+            var queryData = cmd.ExecuteReader();
+            while (queryData.Read())
             {
-                resss = result.GetValue(2).ToString();
+                result = queryData.GetValue(2).ToString();
             }
 
         }
     }
-    return resss;
+    return result;
 })
 .WithName("GetUserName")
 .WithOpenApi();
-
-
 
 app.Run();
